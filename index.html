@@ -1285,22 +1285,34 @@
             .product-detail-container {
                 flex-direction: column;
             }
+             .product-grid {
+                grid-template-columns: 1fr;
+                 gap: 30px;
+                 }
             .checkout-container {
                 flex-direction: column;
             }
             .cart-sidebar {
                 width: 350px;
             }
+            
         }
+        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
                 gap: 20px;
             }
-            .search-bar {
-                margin: 10px 0;
-                width: 100%;
-            }
+          .search-bar {
+        display: none; /* Hide desktop search on mobile */
+        /* Or, make it minimal and always visible:
+        flex: 0 0 auto;
+        margin: 10px 0;
+        width: 100%;
+        */
+    }.nav-links {
+        display: none;
+    }
             .hero h2 {
                 font-size: 40px;
             }
@@ -1332,6 +1344,7 @@
     .container {
         width: 95%;
     }
+    
     .header-content {
         flex-direction: column;
         gap: 15px;
@@ -1353,7 +1366,7 @@
     }
     .btn {
         padding: 12px 25px;
-        font-size: 16px;
+        font-size: 8px;
         margin: 5px 0;
         display: block;
         width: 100%;
@@ -1387,6 +1400,17 @@
     .product-grid {
         grid-template-columns: 1fr;
         gap: 25px;
+    }
+    .search-bar {
+        display: none; /* Hide desktop search on mobile */
+        /* Or, make it minimal and always visible:
+        flex: 0 0 auto;
+        margin: 10px 0;
+        width: 100%;
+        */
+    }
+    .nav-links {
+        display: none;
     }
     .newsletter-form {
         flex-direction: column;
@@ -1449,8 +1473,15 @@
 /* Small Devices (Tablets, 768px and down) */
 @media (max-width: 768px) {
     .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
+        display: none;
+    }
+    .search-bar {
+        display: none; /* Hide desktop search on mobile */
+        /* Or, make it minimal and always visible:
+        flex: 0 0 auto;
+        margin: 10px 0;
+        width: 100%;
+        */
     }
     .nav-links a {
         padding: 12px 15px;
@@ -1498,6 +1529,18 @@
     .cart-sidebar {
         width: 350px;
     }
+    .search-bar {
+        display: none; /* Hide desktop search on mobile */
+        /* Or, make it minimal and always visible:
+        flex: 0 0 auto;
+        margin: 10px 0;
+        width: 100%;
+        */
+    }
+    .product-grid {
+    grid-template-columns: 1fr; /* Forces one column */
+    gap: 30px; /* Adjust gap as needed */
+  }
 }
 /* Large Devices (Desktops, 1200px and down) */
 @media (max-width: 1200px) {
@@ -1599,6 +1642,165 @@
         padding: 15px;
     }
 }
+
+/* --- Mobile Menu Styles --- */
+.mobile-header-icons {
+    display: none; /* Hidden on desktop */
+    gap: 15px;
+}
+
+.menu-toggle {
+    display: none; /* Hidden on desktop */
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 1001; /* Above menu */
+}
+
+#mobile-menu-container {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-gray); /* Or var(--black) */
+    z-index: 1000;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+#mobile-menu-container.active {
+    display: flex; /* Show when active */
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.menu-close {
+    background: none;
+    border: none;
+    font-size: 40px;
+    color: var(--white);
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-nav .nav-links {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.mobile-nav .nav-links li {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.mobile-nav .nav-links a {
+    display: block;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+/* --- Mobile Search Styles --- */
+.mobile-search-trigger {
+    display: none; /* Hidden on desktop */
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.mobile-search-bar {
+    display: none; /* Hidden by default */
+    margin-top: 20px;
+    position: relative; /* Or fixed/absolute if needed */
+    width: 100%;
+}
+
+.mobile-search-bar.active {
+    display: block; /* Show when active */
+}
+
+.mobile-search-bar input {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 30px;
+    border: 1px solid var(--light-gray);
+    background: var(--black); /* Darker for contrast */
+    color: var(--white);
+    font-size: 16px;
+}
+
+.mobile-search-bar button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 9px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* --- Media Query for Mobile --- */
+@media (max-width: 768px) {
+    .header-content {
+        /* Allow wrapping for logo and icons */
+        flex-wrap: wrap;
+        position: relative; /* For absolute positioning of search bar if needed */
+    }
+
+    .search-bar {
+        display: none; /* Hide desktop search on mobile */
+        /* Or, make it minimal and always visible:
+        flex: 0 0 auto;
+        margin: 10px 0;
+        width: 100%;
+        */
+    }
+
+    .mobile-header-icons {
+        display: flex; /* Show mobile icons on mobile */
+        align-items: center;
+    }
+
+    .menu-toggle {
+        display: block; /* Show hamburger on mobile */
+    }
+
+    /* Optional: Make main header less tall on mobile */
+    .main-header {
+        padding: 15px 0;
+    }
+
+    .logo h1 {
+        font-size: 28px; /* Adjust logo size */
+    }
+
+    /* Adjust other elements for better mobile spacing if needed */
+    .top-bar {
+        font-size: 12px;
+        padding: 5px 0;
+    }
+}
+/* --- End Mobile Menu Styles --- */
     </style>
 </head>
 <body>
@@ -1609,6 +1811,40 @@
                 FREE SHIPPING ON ORDERS OVER PKR 10,000 | AUTHENTIC PRODUCTS | 30-DAY RETURNS
             </div>
         </div>
+        <div class="mobile-header-icons">
+    <div class="mobile-search-trigger icon-item">
+        <i class="fas fa-search"></i>
+    </div>
+    <div class="menu-toggle icon-item" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+</div>
+
+<!-- Wrap existing nav -->
+<div id="mobile-menu-container">
+    <div class="menu-header">
+        <div class="logo">
+            <h1>PREM<span>EO</span></h1>
+        </div>
+        <button class="menu-close" id="menu-close">&times;</button>
+    </div>
+    <!-- Existing nav element -->
+    <nav class="mobile-nav">
+        <ul class="nav-links">
+            <li><a href="index.html" id="home-link">Home</a></li>
+            <li><a href="#" id="padel-link">Padel Rackets</a></li>
+            <li><a href="#" id="pickleball-link">Pickleball Rackets</a></li>
+            <li><a href="#" id="accessories-link">Accessories</a></li>
+            <li><a href="#" id="deals-link">Deals</a></li>
+            <li><a href="#" id="contact-link">Contact</a></li>
+        </ul>
+    </nav>
+    <!-- Optional: Move search bar here for mobile -->
+    <div class="mobile-search-bar" id="mobile-search-bar">
+        <input type="text" placeholder="Search...">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+</div>
         <div class="container main-header">
             <div class="header-content">
                 <div class="logo">
@@ -1666,7 +1902,7 @@
                     </div>
                     <div class="category-info">
                         <h3>Padel Rackets</h3>
-                        <p>Professional & recreational rackets</p>
+                        <p>Professional & casual rackets</p>
                         <a href="padel.html" class="btn btn-secondary" id="view-padel">View Collection</a>
                     </div>
                 </div>
@@ -2175,6 +2411,47 @@
     </section>
     
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenuContainer = document.getElementById('mobile-menu-container');
+    const mobileSearchTrigger = document.querySelector('.mobile-search-trigger');
+    const mobileSearchBar = document.getElementById('mobile-search-bar');
+    const body = document.body; // To prevent background scroll
+
+    if (menuToggle && mobileMenuContainer && menuClose) {
+        menuToggle.addEventListener('click', function() {
+            mobileMenuContainer.classList.add('active');
+            body.classList.add('menu-open'); // Prevent background scroll
+        });
+
+        menuClose.addEventListener('click', function() {
+            mobileMenuContainer.classList.remove('active');
+            body.classList.remove('menu-open');
+        });
+
+        // Optional: Close menu if clicking outside the menu content
+        mobileMenuContainer.addEventListener('click', function(e) {
+             if (e.target === mobileMenuContainer) {
+                 mobileMenuContainer.classList.remove('active');
+                 body.classList.remove('menu-open');
+             }
+        });
+    }
+
+    if (mobileSearchTrigger && mobileSearchBar) {
+        mobileSearchTrigger.addEventListener('click', function() {
+            mobileSearchBar.classList.toggle('active');
+            // Optional: Focus the input when it appears
+            if (mobileSearchBar.classList.contains('active')) {
+                mobileSearchBar.querySelector('input').focus();
+            }
+        });
+    }
+});
+
+
+
         // Cart functionality
         let cart = [];
         const cartIcon = document.getElementById('cart-icon');
